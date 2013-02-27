@@ -30,10 +30,12 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#include <math.h>
 #include "Counter.h"
 
-#define TIMER_LENGTH 10
-#define AVG_LEN 100
+#define TIMER_LENGTH 1000
+#define AVG_LEN 1
+#define PBS 807200.0
 #define led_on() digitalWrite(pinLed, HIGH);
 #define led_off() digitalWrite(pinLed, LOW);
 #define led_config() pinMode(pinLed, OUTPUT);
@@ -47,8 +49,10 @@ void setup()
 {
   //led_config(); 
   Serial.begin(57600);
+  Serial.println("Hello world.");
   pinMode(pinLed, OUTPUT);
-  analogWrite(pinLed, 50);
+  //analogWrite(pinLed, 50);
+  led_on();
 }
 
 void loop()
@@ -64,6 +68,6 @@ void loop()
   }
   count /= (float)AVG_LEN;
   
-  Serial.println(count);
+  Serial.println(-log10(count/PBS));
   
 }
